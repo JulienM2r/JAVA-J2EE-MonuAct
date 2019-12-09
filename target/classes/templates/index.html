@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+    <meta charset="UTF-8" />
+    <title>Monument Historique Autour de moi</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+	<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #crp {
+      	width: 100%;
+		}
+		#map, #tabl {
+		    display: inline-block;
+		    
+		}
+		#map {
+        height: 100%;
+   		width: 60%;
+   		float:left;
+   		
+      	}
+		#tabl {
+		   width: 40%;
+		   height: 100%;
+		}
+      
+/*       /* Optional: Makes the sample page fill the window. */ */
+/*       html, body { */
+/*         height: 100%; */
+/*         margin: 0; */
+/*         padding: 0; */
+/*       } */
+      
+    </style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- 	<script type="text/javascript" th:href="@{/js/monJS.js}"></script> -->
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+
+    var lat =/*[[${latitud}]]*/ 'default';
+    var lng =/*[[${longitud}]]*/ 'default';
+    console.log(lat + " / " + lng);
+
+	/*]]>*/
+	/* var lat = ${message};
+	var lng = "3.876716";
+	var ippub = "162.38.81.224 test"; */
+	//console.log(ippub);
+	function showLocationOnMap () {
+		var map;		      
+	     map = new google.maps.Map(document.getElementById('map'), {
+	         center: {lat: Number(lat), lng: Number(lng)},
+	         zoom: 12
+	     });		      
+	     var marker = new google.maps.Marker({
+	         position: {lat: Number(lat), lng: Number(lng)},
+	         map: map,
+// 	         if (location) {
+// 	        	 title: "Public IP:"+location.ipAddress+" @ "+location.city	 
+// 	         }
+	         
+	     });		      
+	}
+	
+	$(document).ready (function () {
+		showLocationOnMap();
+		// getting the public ip address from api and setting on text box
+		// ip api : https://www.ipify.org/
+		
+		/* var test = $.get( "https://api.ipify.org?format=json", function( data ) {
+			  console.log(data);
+			  ippub = data.ip ;
+			  console.log(ippub);
+	    		
+		}); */
+		/* $.get( "https://api.ipify.org?format=json", function( data ) {
+			  console.log(data);
+			  ippub = data.ip ;
+			  //console.log(ippub);
+	    		
+		}); */
+		$( "#ipForm" ).submit(function( event ) {
+ 			  event.preventDefault();
+ 			 console.log ("dans IpForm");  
+ 			 
+ 			 $.ajax({
+				  url: "",
+				  type: "POST",
+				  contentType: "application/x-www-form-urlencoded; charset=UTF-8", // send as JSON
+				  data: $.param( {ipAddress : ippub} ),
+				  complete: function(data) {
+				      console.log ("Request complete");				     
+				  },
+				  success: function(data) {
+					  console.log(data.ipAddress)
+					  $("#status").html(JSON.stringify(data));					  
+					  if (data.ipAddress !=null) {
+						console.log ("Success:"+data.ipAddress);    
+						lat = data.latitude;
+						lng = data.longitude;
+						console.log(lat + "/" + lng)
+						showLocationOnMap(data);					  		  	
+						}
+				  },
+				  error: function(err) {
+				      //console.log(err);
+				      $("#status").html("Error:"+JSON.stringify(data));
+				  },
+			  });			  
+		});
+		$( "#villeForm" ).submit(function( event ) {
+			  event.preventDefault();
+			  console.log ($("#ville").val());
+			  $.ajax({
+				  url: "",
+				  type: "POST",
+				  contentType: "application/x-www-form-urlencoded; charset=UTF-8", // send as JSON
+				  data: $.param( {ville : $("#ville").val()} ),				  
+				  complete: function(data) {
+				      console.log ("Request complete");				     
+				  },
+				  
+				  success: function(data) {
+					  $("#status").html(JSON.stringify(data));					  
+					  if (data.ipAddress !=null) {
+						  console.log ("Success:"+data.cp);    
+						  lat = data.latitude;
+						  lng = data.longitude;
+						  showLocationOnMap(data);					  		  	
+					  }
+				  },
+				  error: function(err) {
+				      console.log(err);
+				      $("#status").html("Error:"+JSON.stringify(data));
+				  },
+			  });			  
+		});
+		
+		
+	});
+	</script>
+   </head>
+   
+
+   <body>     
+       
+      <!--  
+       
+         In Thymeleaf the equivalent of
+         JSP's ${pageContext.request.contextPath}/edit.html
+         would be @{/edit.html}
+          
+         -->
+      
+      	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
+		    <div class="container">
+		      <a class="navbar-brand" href="index.html" th:href="@{/index}">Monumact</a>
+		      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="oi oi-menu"></span> Menu
+		      </button>
+		      <div class="collapse navbar-collapse" id="ftco-nav">
+		        <ul class="navbar-nav nav ml-auto">		          
+		          <li class="nav-item"><a th:href="@{/monumentlist}" class="nav-link"><span>Liste des Monuments</span></a></li>		          
+		        </ul>
+		      </div>
+	    	</div>
+	  	</nav>	  
+	  
+		<h1 th:utext="${title}">..!..</h1>
+		<br><br>
+		<h2 th:utext="${message}">..!..</h2>     
+      
+		<form id="villeForm" action="carte" method="POST">
+		      <input type="text" name = "ville" id = "ville" value="Ville ou Code Postal"/>
+		      <input type="submit" name="submit" value="submit"/>
+		</form>
+		<form id="ipForm" action="carte" method="POST">
+		  <input type="text" name = "ipAddress" id = "ip"/>
+		  <input type="submit" name="submit" value="Ma Position"/>
+		</form>
+		<div id="status"></div>		     
+	     <div id="crp">         
+			<div id="map" style="height: 500px"></div>         
+			<div id="tabl" style="height: 500px">				
+				<table border="1">
+				   <tr>
+				      <th>Listes des Monuments : </th>               
+				   </tr>		   
+				   <tr th:each ="monument : ${monuments}">
+				      <td th:utext="${monument.monumentLabel}"></td>
+				      <td><img th:src="${monument.image}"></td>               
+				   </tr>
+				</table>
+			</div>	
+	     </div>
+	     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfqev6Eu_jtxHtA-m-Spn9MyfUCQW27-Q"></script>
+		     
+		     This product includes GeoLite2 data created by MaxMind, available from
+		  <a href="https://www.maxmind.com">https://www.maxmind.com</a>. 
+   </body>
+    
+</html>

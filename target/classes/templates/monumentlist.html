@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Monument List</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+   </head>
+   <body>
+      <h1>Liste des monuments</h1>
+      <div>
+         <table border="1">
+            <tr>
+               <th>Monuments : </th>               
+            </tr>
+            <tr th:each ="monument : ${monuments}">
+               <td th:utext="${monument.monumentLabel}">...</td>
+               
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>
