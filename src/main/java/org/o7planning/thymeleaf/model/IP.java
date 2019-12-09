@@ -14,6 +14,11 @@ public class IP {
 		return ip;
 	}
 
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	
+
 	
    
     
