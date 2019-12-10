@@ -11,6 +11,10 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.graph.Node_Variable;
 import org.o7planning.thymeleaf.model.Monument;
+import org.springframework.stereotype.Repository;
+
+import com.google.common.collect.Multiset.Entry;
+
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.core.Vars;
 
@@ -19,30 +23,15 @@ import org.apache.jena.sparql.core.Vars;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+@Repository
 public class Req1Monument {
 	public static String code = "Q1736197";	
-	public static ArrayList<String> Listattrib = new ArrayList<String>();
-	public static Map<String, String> properties = new HashMap<String, String>();
-//	private Map<String, Callable<Object>> callables = new HashMap<String, Callable<Object>>();
 	
-	public Req1Monument(String code) {
-		Req1Monument.code = code;
-	}
-	
-	public String getProperty(String key) {
-      return properties.get(key);
-	}
-
-	public void setProperty(String key, String value) {
-      properties.put(key, value);
-	}
-	
-    
-
-	public static void main(String[] args) {
-
+	public Map<String, String> getMonumentRDF(String code){
+		Map<String, String> properties = new HashMap<String, String>();
         String queryString = "PREFIX hint: <http://www.bigdata.com/queryHints#>\n" +
                 "PREFIX wd: <http://www.wikidata.org/entity/>\n" +
                 "PREFIX wdt: <http://www.wikidata.org/prop/direct/>\n" +
@@ -80,57 +69,22 @@ public class Req1Monument {
         while (results.hasNext()) {
         	QuerySolution s = results.next();
         	
-        	Req1Monument.properties.put(s.get("wdLabel").toString(), s.get("ps_Label").toString());		
+        	properties.put(s.get("wdLabel").toString().replace("@fr", ""), s.get("ps_Label").toString().replace("@fr", ""));		
 //        	
         	System.out.println(s.get("wdLabel").toString() + " / " + properties.get(s.get("wdLabel").toString()));
-//        	System.out.println(s.get("monumentLabel").asLiteral().getString());
-//        	System.out.println(s.get("heritageLabel").asLiteral().getString());
-//        	System.out.println(s.varNames().);
-        	
-//        	while (s.varNames() != null) {
-//        		Monument m = new Monument();
-//        		String Attribute = s.toString();
-//        		System.out.println(s.varNames());
-//        		m.setProperty(s.varNames(), );
-//        	}
-        	
-        	
-//        	if (s.get("image") != null){
-//        		ument(s.get("monument").toString(), s.get("monumentLabel").asLiteral().getString(), s.get("heritageLabel").asLiteral().getString(), s.get("image").toString());
-//        		System.out.println(m.toString());
-//        		Listattrib.add(m);
-//        	}else {
-//        		Monument m = new Monument(s.get("monument").toString(), s.get("monumentLabel").asLiteral().getString(), s.get("heritageLabel").asLiteral().getString());
-//        		System.out.println(m.toString());
-//        		ListMonument.add(m);
-//        	}
-//        	
-//        	Listattrib.
-//        }
-//        for (String e : Listattrib) {
-//        	System.out.println(e.);
-//		} 
-        	
-        
+        }
+        return properties;
+	}
 
-    }
+	public static void main(String[] args) {
+		Map<String, String> properti; 
+		properti = new Req1Monument().getMonumentRDF("Q1736197");
+		for (java.util.Map.Entry<String, String> entry : properti.entrySet()){
+			System.out.println(entry.getKey() + "=" + entry.getValue());
+			
+		}
+	}
 
-//    public static HashMap<String, HashMap> retrieveData(String endpointUrl, String query) throws EndpointException {
-//        Endpoint sp = new Endpoint(endpointUrl, false);
-//        HashMap<String, HashMap> rs = sp.query(query);
-//        return rs;
-//    }
 
-	/*
-	 * public static void printResult(HashMap<String, HashMap> rs , int size) { for
-	 * (String variable : (ArrayList<String>) rs.get("result").get("variables")) {
-	 * System.out.print(String.format("%-"+size+"."+size+"s", variable ) + " | "); }
-	 * System.out.print("\n"); for (HashMap value : (ArrayList<HashMap>)
-	 * rs.get("result").get("rows")) { for (String variable : (ArrayList<String>)
-	 * rs.get("result").get("variables")) {
-	 * System.out.print(String.format("%-"+size+"."+size+"s", value.get(variable)) +
-	 * " | "); } System.out.print("\n"); } }
-	 */
-}
 }
 

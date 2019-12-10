@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Monument</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+   </head>
+   <body>
+      <h1>monument Détails</h1>
+      <div>
+         <table border="1">
+            <tr>
+               <th>Label : </th>
+               <th>Information : </th>               
+            </tr>
+            <tr th:each ="prop : ${unMonument}">
+               <td th:utext="${prop.key}">...</td>
+               <td th:if="${prop.key == 'image'}"> 
+               	<img th:src="${prop.value}">...</td>
+               <td th:unless="${prop.key == 'image'}" th:utext="${prop.value}">...</td>               
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

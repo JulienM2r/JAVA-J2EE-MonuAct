@@ -162,7 +162,7 @@
 		      </button>
 		      <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav nav ml-auto">		          
-		          <li class="nav-item"><a th:href="@{/monumentlist}" class="nav-link"><span>Liste des Monuments</span></a></li>		          
+		          <li class="nav-item"><a th:href="@{/monumentDetail}" class="nav-link"><span>unMonument</span></a></li>		          
 		        </ul>
 		      </div>
 	    	</div>
@@ -190,7 +190,8 @@
 				   </tr>		   
 				   <tr th:each ="monument : ${monuments}">
 				      <td th:utext="${monument.monumentLabel}"></td>
-				      <td><img th:src="${monument.image}"></td>               
+				      <td><img th:src="${monument.image}"></td>
+				      <td><a th:href="@{/monumentDetail/{code}(code = ${monument.monument})}"> Voir Detail</a></td>               
 				   </tr>
 				</table>
 			</div>	

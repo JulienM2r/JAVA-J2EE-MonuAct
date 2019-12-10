@@ -5,9 +5,12 @@ import org.o7planning.thymeleaf.dao.RawDBDemoGeoIPLocationService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import org.o7planning.thymeleaf.dao.ReqMonument;
+import org.o7planning.thymeleaf.dao.Req1Monument;
 import org.o7planning.thymeleaf.form.PersonForm;
 import org.o7planning.thymeleaf.model.GeoIP;
 import org.o7planning.thymeleaf.model.Monument;
@@ -18,6 +21,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,11 +40,15 @@ public class MainController {
 	private RawDBDemoGeoIPLocationService locationService;
 	@Autowired
 	private GetCityLocService locationVille;
+	
     
      
    
     @Autowired
     private ReqMonument reqMonument;
+    
+    @Autowired
+    private Req1Monument req1Monument;
     
     @Value("${welcome.message}")
     private String message;
@@ -83,17 +91,17 @@ public class MainController {
 //  }
     
     
-    @RequestMapping(value = { "/monumentList" }, method = RequestMethod.GET)
-    public String monumentList(Model model) {
-    	List<Monument> monuments = reqMonument.calculerAutour("3.876716 43.610769");    	
-        model.addAttribute("monuments", monuments);
+    @RequestMapping(value = { "/monumentDetail/{code}" }, method = RequestMethod.GET)
+    public String monumentList(Model model, @PathVariable String code) {
+    	Map<String, String> unMonument = req1Monument.getMonumentRDF(code);    	
+        model.addAttribute("unMonument", unMonument);
         
-        return "monumentList";
+        return "monumentDetail";
     }
  
     @RequestMapping(value = { "/addPerson" }, method = RequestMethod.GET)
     public String showAddPersonPage(Model model) {
- 
+    	
         PersonForm personForm = new PersonForm();
         model.addAttribute("personForm", personForm);
         
