@@ -51,7 +51,31 @@ public class IpConnue implements Serializable {
 
 		this.IP = ip;		
 	}
-
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getIP() {
+		return IP;
+	}
+	public void setIP(String iP) {
+		IP = iP;
+	}
+	public Collection<MonumentBdd> getMonumentsVisites() {
+		return monumentsVisites;
+	}
+	public void setMonumentsVisites(Collection<MonumentBdd> monumentsVisites) {
+		this.monumentsVisites = monumentsVisites;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	public void setCommentaires(Collection<Commentaire> commentaires) {
+		this.commentaires = commentaires;
+	}
+	
 
 
 	

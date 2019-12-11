@@ -10,11 +10,12 @@ import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import bddControl.Entity.Commentaire;
 import bddControl.Entity.IpConnue;
 import bddControl.Entity.MonumentBdd;
 
 @Repository
-public class IpConnueRepository {
+public class IpConnueRepository implements IpConnueDao{
 
 	@Autowired
 	private EntityManager em;
@@ -27,8 +28,12 @@ public class IpConnueRepository {
 		em.persist(ip);
 		return ip;
 	}
-
 	
+	public Collection<Commentaire> getCommentaires(IpConnue ip) {
+		Query req = em.createQuery("select c from Commentaire m where c.ip =:x");
+		req.setParameter("x", ip.getIP());		
+		return req.getResultList();
+	}	
 	
 	public void addVisite(String codeRdf, String ip) {
 		// TODO Auto-generated method stub
