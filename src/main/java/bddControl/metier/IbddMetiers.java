@@ -19,15 +19,15 @@ public interface IbddMetiers {
 ///////Partie IpConnue		
 	public Collection<IpConnue> getListIp();
 	public IpConnue getbyIP(String ip);	
-	public Collection<Commentaire> getCommentaires(IpConnue ip);
+//	public Collection<Commentaire> getCommentaires(IpConnue ip);
 	public IpConnue addIP(IpConnue ip);			
 //	public void addVisite(String codeRdf, String ip);
 	
 ///////Partie Commentaires	
-public Collection<Commentaire> getCommentairesbyIP(IpConnue ip1);	
+//	public Collection<Commentaire> getCommentairesbyIP(IpConnue ip1);	
 	public Commentaire addCommentaire(Commentaire c);	
 	public Collection<Commentaire> getListCommentaires();	
-	public Collection<Commentaire> getListCommentairesByMonument(MonumentBdd m1);	
+//	public Collection<Commentaire> getListCommentairesByMonument(MonumentBdd m1);	
 	
 ///////Partie MonumentBdd
 	

@@ -101,9 +101,9 @@ public class MainController {
     public String monumentList(Model model, @PathVariable String code) {
     	Map<String, String> unMonument = req1Monument.getMonumentRDF(code);    	
         model.addAttribute("unMonument", unMonument);
-        MonumentBdd m = metier.getbyCode(code);
-        Collection<Commentaire> Commentaires = metier.getListCommentairesByMonument(m);
-        model.addAttribute("Commentaires", Commentaires); 
+//        MonumentBdd m = metier.getbyCode(code);
+//        Collection<Commentaire> Commentaires = metier.getListCommentairesByMonument(m);
+//        model.addAttribute("Commentaires", Commentaires); 
         return "monumentDetail";
     }
  

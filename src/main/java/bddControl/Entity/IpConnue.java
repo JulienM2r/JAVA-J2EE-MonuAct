@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,12 +28,13 @@ public class IpConnue implements Serializable {
 	private long id;
 	
 	@Id
+	@Column(length=20)
 	private String IP;
 	
 //	@OneToMany //(mappedBy = "Commentaire", cascade = CascadeType.ALL)
 //	@JoinColumns({@JoinColumn(name = "idIP", insertable=false, nullable=false), @JoinColumn(name = "IP", insertable=false, nullable=false)})
 //	private Collection<Commentaire> commentaires;
-	
+//	
 		
 //	@ManyToMany
 //	@JoinTable(name = "Visite", 

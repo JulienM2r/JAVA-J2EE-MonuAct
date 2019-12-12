@@ -3,6 +3,7 @@ package bddControl.Entity;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,7 @@ public class MonumentBdd implements Serializable {
 	private long id; 
 	
 	@Id
+	@Column(length=20)
 	private String codeRDF;
 	
 	
@@ -30,7 +32,7 @@ public class MonumentBdd implements Serializable {
 //	private Collection<Commentaire> momumentCommentaires;
 //	public void addCommentaires(Commentaire c) {momumentCommentaires.add(c) ;}
 //	public Collection<Commentaire> getCommentaires() {return momumentCommentaires;}
-	
+//	
 //	@ManyToMany(mappedBy= "id",fetch=FetchType.LAZY)
 //	private Collection<IpConnue> visitesBy;
 //	public void addIp(IpConnue ip) {visitesBy.add(ip) ;}

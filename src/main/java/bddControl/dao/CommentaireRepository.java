@@ -17,7 +17,7 @@ import bddControl.Entity.MonumentBdd;
 
 @Repository
 public class CommentaireRepository {
-
+	@Autowired
 	@PersistenceContext
 	private EntityManager em;
 	

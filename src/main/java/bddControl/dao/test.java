@@ -23,23 +23,23 @@ import bddControl.metier.IbddMetiers; class test {
 		IpConnue ip3 = new IpConnue("1.21.3.7");
 		System.out.println("ip = " + ip3.getIP() );
 //		
-//		MonumentBdd m1 = new MonumentBdd("Q22953925");
-//		System.out.println("Monument Code  = " + m1.getCodeRDF());
-//		MonumentBdd m2 = new MonumentBdd("Q22953974");
-//		System.out.println("Monument Code  = " + m2.getCodeRDF());
-//		MonumentBdd m3 = new MonumentBdd("Q20127550");
-//		System.out.println("Monument Code  = " + m2.getCodeRDF());
+		MonumentBdd m1 = new MonumentBdd("Q22953925");
+		System.out.println("Monument Code  = " + m1.getCodeRDF());
+		MonumentBdd m2 = new MonumentBdd("Q22953974");
+		System.out.println("Monument Code  = " + m2.getCodeRDF());
+		MonumentBdd m3 = new MonumentBdd("Q20127550");
+		System.out.println("Monument Code  = " + m2.getCodeRDF());
 //		
-//		Commentaire c1 = new Commentaire(ip1, m1, "1 commentairetext car ce n'est pas une option");
-//		System.out.println("Commentaire text = " + c1.getCommentairetext());
-//		Commentaire c2 = new Commentaire(ip2, m1, "2 commentairetext car ce n'est pas une option");
-//		System.out.println("Commentaire text = " + c2.getCommentairetext());
-//		Commentaire c3 = new Commentaire(ip3, m1, "3 commentairetext car ce n'est pas une option");
-//		System.out.println("Commentaire text = " + c3.getCommentairetext());
-//		Commentaire c4 = new Commentaire(ip1, m2, "4 commentairetext car ce n'est pas une option");
-//		System.out.println("Commentaire text = " + c4.getCommentairetext());
-//		Commentaire c5 = new Commentaire(ip3, m3, "4 commentairetext car ce n'est pas une option");
-//		System.out.println("Commentaire text = " + c5.getCommentairetext());
+		Commentaire c1 = new Commentaire("1 commentairetext car ce n'est pas une option");
+		System.out.println("Commentaire text = " + c1.getCommentairetext());
+		Commentaire c2 = new Commentaire("2 commentairetext car ce n'est pas une option");
+		System.out.println("Commentaire text = " + c2.getCommentairetext());
+		Commentaire c3 = new Commentaire("3 commentairetext car ce n'est pas une option");
+		System.out.println("Commentaire text = " + c3.getCommentairetext());
+		Commentaire c4 = new Commentaire("4 commentairetext car ce n'est pas une option");
+		System.out.println("Commentaire text = " + c4.getCommentairetext());
+		Commentaire c5 = new Commentaire("4 commentairetext car ce n'est pas une option");
+		System.out.println("Commentaire text = " + c5.getCommentairetext());
 		
 //		metier.addVisite(m1.getCodeRDF(), ip1.getIP());
 //		//System.out.println("Commentaire text = " + c1.getCommentairetext());
@@ -51,7 +51,7 @@ import bddControl.metier.IbddMetiers; class test {
 //		for (Commentaire c : coms) {
 //			System.out.println("Commentaire text ip= " + c.getCommentairetext());
 //		}
-//		
+		
 //		Collection<Commentaire> comm = metier.getListCommentairesByMonument(m1);
 //		for (Commentaire c : comm) {
 //			System.out.println("Commentaire text m= " + c.getCommentairetext());

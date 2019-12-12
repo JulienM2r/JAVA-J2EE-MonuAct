@@ -16,7 +16,7 @@ import bddControl.Entity.MonumentBdd;
 
 @Repository
 public class IpConnueRepository implements IpConnueDao{
-
+	@Autowired
 	@PersistenceContext
 	private EntityManager em;
 	

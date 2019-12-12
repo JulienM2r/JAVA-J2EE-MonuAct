@@ -17,7 +17,7 @@ import bddControl.Entity.MonumentBdd;
 
 @Repository
 public class MonumentBddRepository implements MonumentBddDao{
-
+	@Autowired
 	@PersistenceContext
 	private EntityManager em;
 	

@@ -41,10 +41,10 @@ public class bddMetiers implements IbddMetiers {
 	public IpConnue getbyIP(String ip) {
 		return daoIp.getbyIP(ip);
 	}
-	@Override
-	public Collection<Commentaire> getCommentaires(IpConnue ip) {
-		return daoIp.getCommentaires(ip);
-	}
+//	@Override
+//	public Collection<Commentaire> getCommentaires(IpConnue ip) {
+//		return daoIp.getCommentaires(ip);
+//	}
 	@Override
 	public IpConnue addIP(IpConnue ip) {
 		return daoIp.addIP(ip);
@@ -54,10 +54,10 @@ public class bddMetiers implements IbddMetiers {
 //		daoIp.addVisite(codeRdf, ip);
 //	}
 ///////Partie Commentaires
-	@Override
-	public Collection<Commentaire> getCommentairesbyIP(IpConnue ip) {
-		return daoC.getCommentairesbyIP(ip);
-	}
+//	@Override
+//	public Collection<Commentaire> getCommentairesbyIP(IpConnue ip) {
+//		return daoC.getCommentairesbyIP(ip);
+//	}
 	@Override
 	public Commentaire addCommentaire(Commentaire c) {
 		return daoC.addCommentaire(c);
@@ -66,10 +66,10 @@ public class bddMetiers implements IbddMetiers {
 	public Collection<Commentaire> getListCommentaires() {
 		return daoC.getListCommentaires();
 	}
-	@Override
-	public Collection<Commentaire> getListCommentairesByMonument(MonumentBdd m) {
-		return daoC.getListCommentairesByMonument(m);
-	}
+//	@Override
+//	public Collection<Commentaire> getListCommentairesByMonument(MonumentBdd m) {
+//		return daoC.getListCommentairesByMonument(m);
+//	}
 ///////Partie MonumentBdd
 	@Override
 	public MonumentBdd getbyCode(String code) {
