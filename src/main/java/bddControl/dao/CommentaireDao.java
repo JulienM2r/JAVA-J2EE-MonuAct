@@ -1,18 +1,18 @@
 package bddControl.dao;
 
-import java.util.List;
+import java.util.Collection;
 import bddControl.Entity.Commentaire;
 
 
 public interface CommentaireDao {
 	
-	public Commentaire getbyIP(long numCom);
+	public Collection<Commentaire> getCommentairesbyIP(String ip);
 	
 	public Commentaire addCommentaire(Commentaire c);
 	
-	public List<Commentaire> getListCommentaires();
+	public Collection<Commentaire> getListCommentaires();
 	
-	
+	public Collection<Commentaire> getListCommentairesByMonument(String codeRDF);
 	
 	
 	

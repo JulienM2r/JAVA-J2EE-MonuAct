@@ -1,21 +1,24 @@
 package bddControl.dao;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 //import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+//import bddControl.Entity.Commentaire;
 //import bddControl.Entity.IpConnue;
 import bddControl.Entity.MonumentBdd;
 
 @Repository
-public class MonumentBddRepository {
+public class MonumentBddRepository implements MonumentBddDao{
 
-	@Autowired
+	@PersistenceContext
 	private EntityManager em;
 	
 	public MonumentBdd getbyCode(String code) {
@@ -27,10 +30,13 @@ public class MonumentBddRepository {
 		return m;
 	}
 	
-	public List<MonumentBdd> getListMonuments() {
+	@SuppressWarnings("unchecked")
+	public Collection<MonumentBdd> getListMonuments() {
 		Query req = em.createQuery("from MonumentBDD"); // JPQL
-		return req.getResultList();
+		return Collections.checkedList(req.getResultList(), MonumentBdd.class);
 	}
+	
+	
 	
 	
 	

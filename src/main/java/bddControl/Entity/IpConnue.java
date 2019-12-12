@@ -2,19 +2,17 @@ package bddControl.Entity;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -31,18 +29,25 @@ public class IpConnue implements Serializable {
 	@Id
 	private String IP;
 	
-	@OneToMany(mappedBy="IP")	
-	private Collection<Commentaire> commentaires;
-	public void addCommentaires(Commentaire c) {commentaires.add(c) ;}
-	public Collection<Commentaire> getCommentaires() {return commentaires;}
+//	@OneToMany //(mappedBy = "Commentaire", cascade = CascadeType.ALL)
+//	@JoinColumns({@JoinColumn(name = "idIP", insertable=false, nullable=false), @JoinColumn(name = "IP", insertable=false, nullable=false)})
+//	private Collection<Commentaire> commentaires;
 	
 		
-	@ManyToMany(mappedBy="codeRDF",fetch=FetchType.LAZY)
-	@JoinTable(name = "Visite", joinColumns = @JoinColumn(name = "IP"),
-    inverseJoinColumns = @JoinColumn(name = "codeRDF"))
-	private Collection<MonumentBdd> monumentsVisites;
-	public void addMonumentBdd(MonumentBdd m) {monumentsVisites.add(m) ;}
-	public Collection<MonumentBdd> getMonuments() {return monumentsVisites;}
+//	@ManyToMany
+//	@JoinTable(name = "Visite", 
+//	joinColumns = {@JoinColumn(name = "idIP", nullable=false, updatable=false), @JoinColumn(name = "IP", nullable=false, updatable=false)}, 
+//    inverseJoinColumns = {@JoinColumn(name = "codeRDF", nullable=false, updatable=false), @JoinColumn(name = "idM", nullable=false, updatable=false)})
+//	private Collection<MonumentBdd> monumentsVisites;
+	
+//	public void addMonumentBdd(MonumentBdd m) {
+//		monumentsVisites.add(m);
+//		m.getIps().add(this);
+//	}
+//	public void removeMonumentBdd(MonumentBdd m) {
+//		monumentsVisites.remove(m);
+//		m.getIps().remove(this);
+//    }
 	
 	public IpConnue() {
 	}
@@ -63,18 +68,18 @@ public class IpConnue implements Serializable {
 	public void setIP(String iP) {
 		IP = iP;
 	}
-	public Collection<MonumentBdd> getMonumentsVisites() {
-		return monumentsVisites;
-	}
-	public void setMonumentsVisites(Collection<MonumentBdd> monumentsVisites) {
-		this.monumentsVisites = monumentsVisites;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	public void setCommentaires(Collection<Commentaire> commentaires) {
-		this.commentaires = commentaires;
-	}
+//	public Collection<MonumentBdd> getMonumentsVisites() {
+//		return monumentsVisites;
+//	}
+//	public void setMonumentsVisites(Collection<MonumentBdd> monumentsVisites) {
+//		this.monumentsVisites = monumentsVisites;
+//	}
+//	public static long getSerialversionuid() {
+//		return serialVersionUID;
+//	}
+//	public void setCommentaires(Collection<Commentaire> commentaires) {
+//		this.commentaires = commentaires;
+//	}
 	
 
 

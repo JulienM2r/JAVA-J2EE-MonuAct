@@ -20,6 +20,20 @@
                <td th:unless="${prop.key == 'image'}" th:utext="${prop.value}">...</td>               
             </tr>
          </table>
+         <div id="tabl">				
+				<table border="1">
+				   <tr>
+				      <th>Commentaires : </th>               
+				   </tr>		   
+				   <tr th:each ="Commentaire : ${Commentaires}">
+				      
+				      <td th:utext="${Commentaire.Commentairetext}"></td>
+				                     
+				   </tr>
+				</table>
+			</div>         
+         	
+         </div>
       </div>
    </body>
 </html>

@@ -4,10 +4,14 @@ import org.o7planning.thymeleaf.dao.IpService;
 import org.o7planning.thymeleaf.dao.RawDBDemoGeoIPLocationService;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import bddControl.Entity.*;
+import bddControl.metier.IbddMetiers;
 
 import org.o7planning.thymeleaf.dao.ReqMonument;
 import org.o7planning.thymeleaf.dao.Req1Monument;
@@ -34,6 +38,8 @@ public class MainController {
  
     //private static List<Person> persons = new ArrayList<Person>();
     //private static ArrayList<Monument> monuments = new ArrayList<Monument>();
+	@Autowired
+	private IbddMetiers metier;
 	@Autowired
 	private IpService ipService;
 	@Autowired
@@ -95,7 +101,9 @@ public class MainController {
     public String monumentList(Model model, @PathVariable String code) {
     	Map<String, String> unMonument = req1Monument.getMonumentRDF(code);    	
         model.addAttribute("unMonument", unMonument);
-        
+        MonumentBdd m = metier.getbyCode(code);
+        Collection<Commentaire> Commentaires = metier.getListCommentairesByMonument(m);
+        model.addAttribute("Commentaires", Commentaires); 
         return "monumentDetail";
     }
  
